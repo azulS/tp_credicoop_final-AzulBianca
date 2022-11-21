@@ -37,7 +37,8 @@ public class Publicacion extends Persistente {
         this.contenidoPublicacion = contenidoPublicacion1;
     }
 
-    public void agregarEstadoDePublicacion(EstadoDeLaPublicacion estadoNuevo){
+    public void agregarEstadoDePublicacion(Estado estado1){
+        EstadoDeLaPublicacion estadoNuevo = new EstadoDeLaPublicacion(this, estado1);
         this.estadosDePublicacion.add(estadoNuevo);
     }
 }
