@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(path = "productos",excerptProjection = DTOProducto.class)
+@RepositoryRestResource(path = "producto",excerptProjection = DTOProducto.class)
 public interface RepoProductoJPA extends JpaRepository<Producto, Long> {
 
     Page<Producto> findByNombre(String nombre, Pageable page);

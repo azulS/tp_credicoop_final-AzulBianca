@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
-@RepositoryRestResource(path = "publicaciones",excerptProjection = DTOPublicacion.class)
+@RepositoryRestResource(path = "publicacion",excerptProjection = DTOPublicacion.class)
 public interface RepoContenidoPublicacionJPA extends JpaRepository<ContenidoPublicacion, Long> {
         @Override
         @RestResource(exported = false)

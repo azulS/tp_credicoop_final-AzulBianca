@@ -4,6 +4,11 @@ import ar.edu.utn.link.correlativas.model.Persistente;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,4 +38,5 @@ public class PersonalizacionGestores extends Persistente {
     public void agregarTecnicaDeImpresion(TecnicaDeImpresion tecnicaNueva){
         this.tecnicaDeImpresion.add(tecnicaNueva);
     }
+
 }

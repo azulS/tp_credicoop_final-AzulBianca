@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -16,16 +15,29 @@ import java.util.Optional;
 public class PublicacionControllerComplement {
 
     @Autowired
-    RepoPublicacionJPA repo;
+    RepoPublicacionJPA repoPublicacion;
     @Transactional
+    @DeleteMapping("/publicacion/{productoId}")
     public @ResponseBody ResponseEntity<Object> delete (@PathVariable("publicacionId") Long publicacionId) {
-        Optional<Publicacion> publicacionOptional = Optional.ofNullable(repo.findById(publicacionId));
+        Optional<Publicacion> publicacionOptional = repoPublicacion.findById(publicacionId);
 
         if (publicacionOptional.isPresent()) {
             Publicacion publicacion = publicacionOptional.get();
             publicacionOptional.get().agregarEstadoDePublicacion(Estado.CANCELADO);
-            return ResponseEntity.ok("materia borrada ok");
+            return ResponseEntity.ok("Publicacion borrada ok");
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @Transactional
+    @PostMapping("/publicacionId/{status}")
+    public @ResponseBody ResponseEntity<Object> agregarEstado(
+            @PathVariable ("publicacionId") Long publicacionId,
+            @RequestBody Estado status
+    ) throws Exception{
+        Optional <Publicacion> publicacionOptional = repoPublicacion.findById(publicacionId);
+        EstadoDeLaPublicacion estadoNuevo = new EstadoDeLaPublicacion(publicacionOptional.get(), status);
+
+        return ResponseEntity.ok().build();
     }
 }

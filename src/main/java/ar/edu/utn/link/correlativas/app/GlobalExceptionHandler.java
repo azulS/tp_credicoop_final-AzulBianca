@@ -15,7 +15,6 @@ public class GlobalExceptionHandler {
     String materiaRepetida(MateriaRepetidaException ex){
         return "La materia " + ex.getNombreMateria() + " ya existe.";
     }
-
     @ExceptionHandler(AlumnoRepetidoException.class)
     @ResponseBody
     @ResponseStatus(HttpStatus.CONFLICT)

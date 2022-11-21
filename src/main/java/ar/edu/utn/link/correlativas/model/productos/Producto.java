@@ -44,7 +44,7 @@ public class Producto extends Persistente {
     public void agregarPersonalizacionGestores(PersonalizacionGestores personalizacionNueva)
             throws PersonalizacionGestoresException {
         if(this.getPersonalizacionesGestores().contains(personalizacionNueva)){
-            throw  new PersonalizacionGestoresException ("ya es correlativa", this,personalizacionNueva);
+            throw  new PersonalizacionGestoresException ("ya tiene esta perosnalizacion", this,personalizacionNueva);
         }
         this.personalizacionesGestores.add(personalizacionNueva);
     }
