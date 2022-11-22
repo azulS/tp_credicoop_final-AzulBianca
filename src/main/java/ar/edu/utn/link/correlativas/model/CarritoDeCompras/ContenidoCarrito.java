@@ -2,11 +2,14 @@ package ar.edu.utn.link.correlativas.model.CarritoDeCompras;
 
 import ar.edu.utn.link.correlativas.model.Persistente;
 import ar.edu.utn.link.correlativas.model.Publicaciones.PersonalizacionVendedores;
+import ar.edu.utn.link.correlativas.model.productos.Producto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name="ContenidoCarrito")
@@ -29,7 +32,9 @@ public class ContenidoCarrito extends Persistente {
         this.personalizacionVendedores = personalizacionVendedores;
         this.cantidad = 1;
     }
-
+    public void sumarCantidad(int numero){
+        this.cantidad = cantidad +numero;
+    }
     public int getMonto(){
         int precioPersonalizacion=
                 this.personalizacionVendedores.getPrecio()

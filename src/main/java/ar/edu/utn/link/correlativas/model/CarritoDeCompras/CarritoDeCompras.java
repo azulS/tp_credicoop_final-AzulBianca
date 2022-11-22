@@ -1,7 +1,10 @@
 package ar.edu.utn.link.correlativas.model.CarritoDeCompras;
 
+import ar.edu.utn.link.correlativas.app.EstadoDeLaPublicacionException;
 import ar.edu.utn.link.correlativas.model.Persistente;
+import ar.edu.utn.link.correlativas.model.Publicaciones.Estado;
 import ar.edu.utn.link.correlativas.model.Publicaciones.PersonalizacionVendedores;
+import ar.edu.utn.link.correlativas.model.productos.Producto;
 import ar.edu.utn.link.correlativas.model.usuario.Comprador;
 import ar.edu.utn.link.correlativas.model.usuario.Vendedor;
 import lombok.Getter;
@@ -10,6 +13,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -47,8 +51,18 @@ public class CarritoDeCompras extends Persistente {
                 '}';
     }
 
-    public void agregarContenidoCarrito(ContenidoCarrito contenidoNuevo){
+    public void agregarContenidoCarrito(PersonalizacionVendedores personalizacion){
+
+//        if (this.contenidoCarrito.contains(personalizacion))
+//        {
+//            this.contenidoCarrito.equals(personalizacion).getId();
+//            sumarCantidad(1);
+//        }  todo si ya tiene ese elemento en el carrito solo sumarle 1 a la cantidad
+        ContenidoCarrito contenidoNuevo = new ContenidoCarrito(personalizacion);
         this.contenidoCarrito.add(contenidoNuevo);
+    }
+    public Collection<ContenidoCarrito> getContenidoCarrito(){
+        return new ArrayList<ContenidoCarrito>(this.contenidoCarrito);
     }
 }
 

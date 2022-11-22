@@ -1,5 +1,6 @@
 package ar.edu.utn.link.correlativas.model.Publicaciones;
 
+import ar.edu.utn.link.correlativas.app.EstadoDeLaPublicacionException;
 import ar.edu.utn.link.correlativas.model.CarritoDeCompras.ContenidoCarrito;
 import ar.edu.utn.link.correlativas.model.Persistente;
 import ar.edu.utn.link.correlativas.model.productos.Producto;
@@ -11,6 +12,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -37,8 +39,15 @@ public class Publicacion extends Persistente {
         this.contenidoPublicacion = contenidoPublicacion1;
     }
 
-    public void agregarEstadoDePublicacion(Estado estado1){
+    public void agregarEstadoDePublicacion(Estado estado1) throws EstadoDeLaPublicacionException {
+        Estado ultimoEstadoAgregado= estadosDePublicacion.get(estadosDePublicacion.size()-1).getEstado();
+        if (ultimoEstadoAgregado.equals(estado1)) {
+            throw new EstadoDeLaPublicacionException("este es el estado actual de la publicacion", this, estado1);
+        }
         EstadoDeLaPublicacion estadoNuevo = new EstadoDeLaPublicacion(this, estado1);
         this.estadosDePublicacion.add(estadoNuevo);
+    }
+    public Collection<EstadoDeLaPublicacion> getEstadosDePublicacion(){
+        return new ArrayList<EstadoDeLaPublicacion>(this.estadosDePublicacion);
     }
 }

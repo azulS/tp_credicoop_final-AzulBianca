@@ -1,5 +1,6 @@
 package ar.edu.utn.link.correlativas.model.CarritoDeCompras;
 
+import ar.edu.utn.link.correlativas.app.CarritosDeComprasException;
 import ar.edu.utn.link.correlativas.model.Persistente;
 import ar.edu.utn.link.correlativas.model.Publicaciones.MedioDePago;
 import lombok.Getter;
@@ -46,7 +47,13 @@ public class PagoCarrito extends Persistente {
         }
     }
 
-    public void agregarEstadoCompra(EstadoCompra estadoCompraNuevo){
+    public void agregarEstadoCompra(EstadoCompra estadoCompraNuevo)throws CarritosDeComprasException {
+        if (this.getEstadoDeCompra().contains(estadoCompraNuevo)){
+            throw new CarritosDeComprasException("solicitud ya enviada", this.getCarritoDeCompras().getUser(), carritoDeCompras);
+        }
+        if (this.getEstadoDeCompra().contains(estadoCompraNuevo.getEstado()== EstadoPagos.CONFIRMADO)){
+            throw new CarritosDeComprasException("carrito ya pagado", this.getCarritoDeCompras().getUser(), carritoDeCompras);
+        }
         this.estadoDeCompra.add(estadoCompraNuevo);
     }
 
