@@ -38,7 +38,7 @@ public class Comprador extends Usuario{
     public void pagarCarrito(CarritoDeCompras carrito, MedioDePago medioElegido) throws CarritosDeComprasException {
         EstadoCompra esperandoPago= new EstadoCompra(carrito, PENDIENTE_PAGO);
         carrito.getPagoCarrito().agregarEstadoCompra(esperandoPago);
-//        carrito.getVendedor().confirmarPago(carrito, medioElegido);
+        carrito.getVendedor().confirmarPago(carrito, medioElegido);
     }
     public Collection<CarritoDeCompras> getCarritosDeCompras(){
         return new ArrayList<CarritoDeCompras>(this.carritosDeCompras);

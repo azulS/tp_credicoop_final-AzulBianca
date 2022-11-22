@@ -3,14 +3,12 @@ package ar.edu.utn.link.correlativas.model.usuario;
 
 import ar.edu.utn.link.correlativas.app.CarritosDeComprasException;
 import ar.edu.utn.link.correlativas.app.MediosDePagoAceptadosException;
-import ar.edu.utn.link.correlativas.app.ProductosCargadosException;
 import ar.edu.utn.link.correlativas.app.PublicacionesException;
 import ar.edu.utn.link.correlativas.model.CarritoDeCompras.CarritoDeCompras;
 import ar.edu.utn.link.correlativas.model.CarritoDeCompras.EstadoCompra;
 import ar.edu.utn.link.correlativas.model.Publicaciones.MedioDePago;
 import ar.edu.utn.link.correlativas.model.Publicaciones.Publicacion;
 import ar.edu.utn.link.correlativas.model.ServicioExterno;
-import ar.edu.utn.link.correlativas.model.productos.Producto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -58,7 +56,7 @@ public class Vendedor extends Usuario {
         this.facturasElectronicas.add(facturaNueva);
     }
 
-    public void confirmarPago(CarritoDeCompras carrito) throws CarritosDeComprasException {
+    public void confirmarPago(CarritoDeCompras carrito, MedioDePago medioElegido) throws CarritosDeComprasException {
         if (System.console().readLine()== "Y") {
             EstadoCompra pagoAceptado = new EstadoCompra(carrito, CONFIRMADO);
             carrito.getPagoCarrito().agregarEstadoCompra(pagoAceptado);
@@ -68,6 +66,7 @@ public class Vendedor extends Usuario {
 
             // TODO: 4/11/2022 estaria bueno separarlo en dos subacciones que realiza el vendedor
             //  o es demaciado minuisioso?
+            // agregar "carritos en espera de confirmacion"
         }
         else {
             EstadoCompra pagoAceptado = new EstadoCompra(carrito, RECHAZADO);

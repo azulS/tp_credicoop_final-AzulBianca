@@ -1,6 +1,7 @@
 package ar.edu.utn.link.correlativas.app.repositorios.modelo.controllerComplement;
 
 
+import ar.edu.utn.link.correlativas.app.CarritosDeComprasException;
 import ar.edu.utn.link.correlativas.app.repositorios.modelo.RepoCompradorJPA;
 import ar.edu.utn.link.correlativas.app.repositorios.modelo.RepoMediosDePagoJPA;
 import ar.edu.utn.link.correlativas.app.repositorios.modelo.sinDTOs.RepoCarritoJPA;
@@ -76,7 +77,7 @@ public class CompradorControllerComplement {
             @PathVariable("compradorId") Long compradorId,
             @PathVariable("carritoId") Long carritoId,
             @RequestBody Long medioDePagoId
-    ) {
+    ) throws CarritosDeComprasException {
         Optional<CarritoDeCompras> carritoOptional = repoCarrito.findById(carritoId);
         Optional<Comprador> compradorOptional = repoComprador.findById(compradorId);
         Optional <MedioDePago> medioOptional =repoMedio.findById(medioDePagoId);
